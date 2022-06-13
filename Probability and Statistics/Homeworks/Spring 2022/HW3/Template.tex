@@ -1,0 +1,217 @@
+%!TeX program = xelatex
+\documentclass[a4paper]{article}
+\usepackage{graphicx}
+\usepackage{amsmath, amsfonts, geometry, float, listings, enumerate, multicol}
+\usepackage{multicol, float, color, colortbl}
+\usepackage{tikz, titlesec, parskip, pgfplots, filecontents}
+\usepackage{hyperref}
+\usepackage{amsmath}
+\usepackage{bidipoem}
+\usepackage{tikz, titlesec, parskip}
+\usepackage{tikz,pgfplots}
+\usepackage[americanvoltages,fulldiodes,siunitx]{circuitikz}
+\usetikzlibrary{shapes,arrows}
+\usetikzlibrary{angles,quotes}
+\usepackage{enumitem}
+
+\titlespacing{\section}{0pt}{10pt}{0pt}
+\titlespacing{\subsection}{0pt}{10pt}{0pt}
+\titlespacing{\subsubsection}{0pt}{10pt}{0pt}
+
+\usetikzlibrary{calc,patterns,through}
+\newcommand{\arcangle}{%
+	\mathord{<\mspace{-9mu}\mathrel{)}\mspace{2mu}}%
+}
+
+\renewcommand{\baselinestretch}{1.4}
+ \geometry{
+ a4paper,
+ total={170mm,257mm},
+ left=20mm,
+ top=20mm,
+ }
+\usepackage{fancyhdr}
+\usepackage{indentfirst}
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{\textbf{آمار و احتمال مهندسی}}
+\lhead{\textbf{تمرین عملی سری سوم}}
+\cfoot{(\space \space \space \space \textbf{\thepage}  \space \space \space)}
+\renewcommand{\headrulewidth}{1pt}
+\renewcommand{\footrulewidth}{1pt}
+
+ 
+\usepackage{xepersian}
+\setlatintextfont{Times New Roman}
+\settextfont{XB Niloofar}
+\DefaultMathsDigits
+
+\makeatletter
+\bidi@patchcmd{\@Abjad}{آ}{الف}
+{\typeout{Succeeded in changing آ into الف}}
+{\typeout{Failed in changing آ into الف}}
+\makeatother
+\PersianAlphs
+
+\begin{document}
+\begin{minipage}{0.6\textwidth}
+\begin{bf}
+\begin{center}
+	به نام خدا\\
+	\vspace{0.25cm}
+	دانشگاه صنعتی شریف\\
+	\vspace{0.25cm}
+	دانشکده مهندسی برق\\
+	\vspace{0.5cm}
+
+\large
+گروه دکتر کرباسی - آمار و احتمال مهندسی \\
+نیم سال دوم
+۱۴۰۱-۱۴۰۰\\
+\Large
+\vspace{0.4cm}
+تمرین عملی سری سوم \\
+\end{center}
+\end{bf}
+\normalsize
+\end{minipage} \hfill
+\begin{minipage}{0.35\textwidth}
+\begin{flushleft}
+\includegraphics[width=0.6\textwidth]{Shariflogo.png}\\ \large
+\end{flushleft}
+
+ \end{minipage}
+\\
+
+\rule[0.1\baselineskip]{\textwidth}{1.5pt}
+
+\large
+
+\section*{
+لطفاً به نکات زیر توجه بفرمایید: (رعایت نکردن این موارد باعث کاهش نمره می‌شود.)
+}
+\begin{enumerate}
+	\item 
+نتایج و پاسخ های خود را در یک فایل با فرمت zip به نام
+\lr{HW2\_StudentID\_Name}
+ در سایت  
+\href{https://quera.org/overview/add_to_course/course/10631}{\lr{Quera}} 
+ قرار دهید. همچنین فایل پایتون خود را به همان نام در قسمت مخصوص به خود آپلود کنید.
+	\item 
+کسب نمره کامل در هر سؤال مستلزم تحویل  \textbf{کدها} و \textbf{توضیحات} می‌باشد. 
+\item 
+برای سؤالات، باید روشی که استفاده کرده‌اید را توضیح  و نتایجی که گرفته‌اید را ارائه دهید. این توضیحات می‌تواند در یک فایل  .pdf  و یا در یک فایل  .ipynb باشد. 
+\item
+فایل های تحویلی شما دو بخش میباشند، یک بخش فایل .zip که شامل فایل .ipynb کد و گزارش شما میباشد، یک بخش هم کد های هر سوال به شکل جداگانه میباشند که باید در فرمت .py در سامانه کوئرا در کنار فایل .zip آپلود شوند.(برای مثال اگر تمرین شامل 3 سوال بود، باید علاوه بر فایل .zip که تحویل مصحح میشود، 3 فایل .py در سامانه کوئرا در محل بارگذاری مشخص شده آپلود کنید.)
+\item 
+کدهای خود را خوانا بنویسید و کامنت‌‌گذاری کنید. در plot های خود عنوان، label و خط‌کشی‌های مناسب را اضافه کنید.
+\item
+در طول ترم امکان ارسال با تاخیر پاسخ  همه‌ی تمارین تا سقف پنج روز و در مجموع دوازده روز وجود دارد. پس از گذشت این مدت، پاسخ‌های ارسال‌شده پذیرفته نخواهند بود. همچنین، به ازای هر روز تأخیر غیر مجاز  بیست درصد از نمره تمرین به صورت ساعتی کسر خواهد شد.
+\item
+کدهای شما تماماً باید توسط خودتان نوشته شده باشند. هرگونه استفاده از کد دیگران به هر شکل ممکن، تقلب محسوب می‌شود و نمره تمرین کامپیوتری جاری صفر خواهد شد. پس در هیچ صورت کدهای خود را برای دیگران ارسال نکنید.
+\item 
+ابهام يا اشكالات خود را مي توانيد  از طریق
+\href{mailto:smmzdr@gmail.com}{\LR{smmzdr@gmail.com}}
+یا 
+\href{mailto:javadiamirhosein.2000@gmail.com}{\LR{javadiamirhosein.$2000$@gmail.com}}
+مطرح نماييد.
+\item 
+مهلت تحویل:  
+\textbf{نیمه شب جمعه 26 فروردین}
+\end{enumerate}
+\rule[0.1\baselineskip]{\textwidth}{1.5pt}
+
+\clearpage
+\section{‌تلفنچی نمایی}
+فرض کنید شما در مرکز مخابرات نشسته‌اید و به زمان‌هایی که یک تماس تلفنی برقرار می‌شود نگاه  می‌کنید. با بررسی دقیق‌تر این تماس‌ها می‌بینید که فاصله‌ی بین زمان‌هایی که  یک تماس برقرار می‌شود از توزیع نمایی با پارامتر $ 0.3 $ پیروی می‌کند و این فاصله‌ها بین تماس‌های مختلف مستقل از هم هستند. چون لحظه‌ی برقراری تماس‌ها تصادفی است و شما از توزیع که روی فاصله ی زمانی بین تماس‌ها وجود دارد آگاهید، سوالی برای شما پیش می‌آید و آن توزیع حاکم بر تعداد تماس‌ها در واحد زمان است. برای این منظور شما به یک شبیه سازی روی می‌آوردید. از متغیر تصادفی
+$ X \sim \text{Exponential}(0.3) $
+$ 1000 $ نمونه می‌گیرید و فرض می‌کنید این‌ها فاصله‌ی بین تماس‌های مختلف هستند. حال به بازه‌های زمان به طول  1 نگاه می‌کنید و تعداد تماس‌های گرفته شده در هر بازه ی زمانی به طول واحد را یادداشت می‌کنید. یعنی به باز ه های
+$ [0,1] $,
+$ [1,2] $
+تا انتها (تا جایی که تماسی گرفته شده باشد)
+نگاه کرده و در هر
+بازه تعداد تماس‌ها را خواهید شمرد. سپس هیستوگرام نرمالیزه‌شده تعداد تماس‌ها در بازه‌های به طول واحد را رسم می‌کنید. انتظار دارید این هیستوگرام متناظر با تابع جرم احتمال چه متغیر تصادفی با چه پارامترهایی باشد؟ تابع جرم
+احتمال آن متغیر تصادفی را همراه این هیستوگرام بر روی یک 
+\lr{plot}
+ترسیم کنید.
+
+توابع پیشنهادی:
+\lr{np.random.exponential}
+از کتاب‌خانه‌ی 
+\lr{numpy}
+\section{جمع ماکسیمم ها}
+متغیر تصادفی زیر را در نظر بگیرید:
+\begin{gather*}
+	X_i \sim Bernoulli(p = 0.4)
+\end{gather*}
+متغیر های تصادفی $Z, Y_1, Y_2, Y_3$ را به شکل زیر تعریف میکنیم:
+\begin{gather*}
+	Y_1 = max(X_1, X_2)
+	\\
+	Y_2 = max(X_2, X_3)
+	\\
+	Y_3 = max(X_3, X_1)
+	\\
+	Z = Y_1 + Y_2 + Y_3
+\end{gather*}
+به ازای 
+$ n = 1 : 10000 $
+از $X_1, X_2, X_3$ $n$ نمونه بگیرید و $Z, Y_1, Y_2, Y_3$ را تشکیل دهید.
+\begin{enumerate}
+	\item
+	امیدریاضی و واریانس $Z$ به ازای $n$ های مختلف را در دو آرایه \lr{E} و \lr{Var} ذخیره کنید. 
+	\item
+	آرایه \lr{Cml\_avg\_E} را تعریف کرده و میانگین k عضو ابتدایی \lr{E} را در عضو \lr{k}ام آن ذخیره کنید.
+	\item
+	آرایه \lr{Cml\_avg\_Var} را تعریف کرده و میانگین k عضو ابتدایی \lr{Var} را در عضو \lr{k}ام آن ذخیره کنید.
+	\item
+	نمودار \lr{Cml\_avg\_E} و \lr{Cml\_avg\_Var} رابر حسب $n$ رسم کنید. آیا با افزایش $n$ واریانس و امیدریاضی تجربی به مقدار خاصی میل میکنند؟ این مقادیر را بصورت تئوری نیز حساب کنید و با نتیجه بدست آمده مقایسه کنید.
+	\item
+	آرایه های \lr{Var\_Y1, Var\_Y2, Var\_Y3} را تعریف کنید و واریانس های $Y_1, Y_2, Y_3$ را به ازای $n$ های مختلف در آنها ذخیره کنید.
+	\item
+	آرایه \lr{Var\_Y\_Sum} را جمع سه آرایه ای که در قسمت قبل تعریف کردید قرار دهید.
+	\item
+	آرایه \lr{Cml\_avg\_Y\_Sum } را تعریف کرده و میانگین k عضو ابتدایی \lr{Var\_Y\_Sum} را در عضو \lr{k}ام آن ذخیره کنید.
+	\item
+	نمودار \lr{Cml\_avg\_Y\_Sum} را بر حسب $n$ رسم کنید. آیا با افزایش $n$ جمع واریانس های تجربی $Y_1, Y_2, Y_3$ به مقدار خاصی میل میکند؟ اگر بله این مقدار را با مقداری که در قسمت 4 بدست آوردید مقایسه کرده و در صورت متفاوت بودن آن را توجیه کنید.
+\end{enumerate}
+\section{
+	جمع رئوس (امتیازی)
+}
+گراف زیر را در نظر بگیرید. هر کدام از رئوس این گراف یک عدد مخصوص دارد و هدف ما پیدا کردن مجموع عددهای رئوس این گراف  در هر راس از گراف است. در اینجا هر راس می‌تواند با راس همسایه تبادل اطلاعات کند ولی رئوس حافظه محدودی دارند و می‌توانند فقط تعداد محدودی عدد در خود ذخیره کنند. یال‌ها به دلخواه شماره‌گذاری شده‌اند و عدد هر راس داخل آن در پرانتز نوشته شده‌است. 
+\begin{center}
+	
+	\begin{tikzpicture}[main/.style = {draw, circle, minimum width=15mm, minimum height=15mm}] 
+		\node (1) [main]  at (1.5,6) {$A(1.6)$};
+		\node (2) [main]  at (6.5,6) {$B(0.8)$};
+		\node (3) [main]  at (9,3) {$C(1.6)$};
+		\node (5) [main]  at (1.5,0) {$E(1.4)$};
+		\node (4) [main]  at (6.5,0) {$D(0.5)$};
+		\node (6) [main]  at (-1,3) {$F(3.2)$};
+		\draw[-]  (1) -- (2) node[midway,above] {$1$};
+		\draw[-]  (2) -- (3) node[midway,above] {$2$};
+		\draw[-]  (3) -- (4) node[midway,right] {$3$};
+		\draw[-]  (4) -- (5) node[midway,below] {$4$};
+		\draw[-]  (5) -- (6) node[midway,left] {$5$};
+		\draw[-]  (6) -- (1) node[midway,left] {$6$};
+		\draw[-]  (3) -- (6) node[midway,below] {$7$};
+	\end{tikzpicture} 
+\end{center}
+یک ایده‌ برای تخمین مجموع مقادیر رئوس این است که هر راس نمونه‌ی تصادفی از متغیر تصادفی نمایی با  با نرخ عدد آن راس  تولید کند و نمونه‌ی خود را با راس همسایه تبادل ‌کند و پس از آن دو راس همسایه نمونه‌ی خود را با مینیمم نمونه‌ی خود و همسایه جایگزین ‌کنند. پس از چند مرحله همه رئوس مینیمم نمونه‌های تصادفی گره‌های مختلف را میبینند و الگوریتم همگرا می‌شوند و گره‌ها میتوانند مقدار مینیمم را ذخیره ‌کنند. حال می‌دانیم مینیمم $ n $ متغیر تصادفی نمایی با نرخ‌های 
+$ \lambda_{i} $،
+یک متغیر تصادفی نمایی با نرخ 
+$ \sum_{i=1}^{n} \lambda_{i} $ 
+است. پس اگر تعداد مناسبی این الگوریتم را تکرار کنیم، همه رئوس به چند نمونه
+\lr{iid}
+از متغیر نمایی با پارامتر مجموع مطلوب ما دسترسی دارند و می‌توانند با تخمین 
+\lr{Maximum Likelihood}
+پارامتر نرخ متغیر نمایی را تخمین بزنند.
+\begin{enumerate}
+	\item 
+	می‌توانید یال‌ها را شماره‌گذاری کنید یا از شماره‌گذاری پیشنهادی استفاده کنید. در هر راند به ترتیب‌، یالی را انتخاب کنید و بین دو نمونه‌ی رئوس دو سر یال مینیمم‌گیری کنید و در صورت نیاز نمونه‌ی رئوس را به روز رسانی کنید. 
+	\item 
+	حداقل تعداد راند مورد نیاز برای این که مطمئن شویم نمونه‌ی مینیمم به همه‌ی گره‌ها رسیده است چه قدر است؟ 
+	\item 
+	الگوریتم بالا را اجرا کنید و مجموع اعداد رئوس را با حداکثر خطای $ 0.1 $ به دست بیاورید.
+\end{enumerate}
+\end{document}
