@@ -1,0 +1,254 @@
+%!TeX program = xelatex
+\documentclass[a4paper]{article}
+\usepackage{graphicx}
+\usepackage{amsmath, amsfonts, geometry, float, listings, enumerate, multicol}
+\usepackage{multicol, float, color, colortbl}
+\usepackage{tikz, titlesec, parskip, pgfplots, filecontents}
+\usepackage{hyperref}
+\usepackage{amsmath}
+\usepackage{bidipoem}
+\usepackage{tikz, titlesec, parskip}
+\usepackage{tikz,pgfplots}
+\usepackage[americanvoltages,fulldiodes,siunitx]{circuitikz}
+\usetikzlibrary{shapes,arrows}
+\usetikzlibrary{angles,quotes}
+\usepackage{enumitem}
+
+\titlespacing{\section}{0pt}{10pt}{0pt}
+\titlespacing{\subsection}{0pt}{10pt}{0pt}
+\titlespacing{\subsubsection}{0pt}{10pt}{0pt}
+
+\usetikzlibrary{calc,patterns,through}
+\newcommand{\arcangle}{%
+	\mathord{<\mspace{-9mu}\mathrel{)}\mspace{2mu}}%
+}
+
+\renewcommand{\baselinestretch}{1.4}
+ \geometry{
+ a4paper,
+ total={170mm,257mm},
+ left=20mm,
+ top=20mm,
+ }
+\usepackage{fancyhdr}
+\usepackage{indentfirst}
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{\textbf{آمار و احتمال مهندسی}}
+\lhead{\textbf{تمرین عملی سری دوم}}
+\cfoot{(\space \space \space \space \textbf{\thepage}  \space \space \space)}
+\renewcommand{\headrulewidth}{1pt}
+\renewcommand{\footrulewidth}{1pt}
+
+ 
+\usepackage{xepersian}
+\setlatintextfont{Times New Roman}
+\settextfont{XB Niloofar}
+\DefaultMathsDigits
+
+\makeatletter
+\bidi@patchcmd{\@Abjad}{آ}{الف}
+{\typeout{Succeeded in changing آ into الف}}
+{\typeout{Failed in changing آ into الف}}
+\makeatother
+\PersianAlphs
+
+\begin{document}
+\begin{minipage}{0.6\textwidth}
+\begin{bf}
+\begin{center}
+	به نام خدا\\
+	\vspace{0.25cm}
+	دانشگاه صنعتی شریف\\
+	\vspace{0.25cm}
+	دانشکده مهندسی برق\\
+	\vspace{0.5cm}
+
+\large
+گروه دکتر کرباسی - آمار و احتمال مهندسی \\
+نیم سال دوم
+۱۴۰۱-۱۴۰۰\\
+\Large
+\vspace{0.4cm}
+تمرین عملی سری دوم \\
+\end{center}
+\end{bf}
+\normalsize
+\end{minipage} \hfill
+\begin{minipage}{0.35\textwidth}
+\begin{flushleft}
+\includegraphics[width=0.6\textwidth]{Shariflogo.png}\\ \large
+\end{flushleft}
+
+ \end{minipage}
+\\
+
+\rule[0.1\baselineskip]{\textwidth}{1.5pt}
+
+\large
+
+\section*{
+لطفاً به نکات زیر توجه بفرمایید: (رعایت نکردن این موارد باعث کاهش نمره می‌شود.)
+}
+\begin{enumerate}
+	\item 
+نتایج و پاسخ های خود را در یک فایل با فرمت zip به نام
+\lr{HW2\_StudentID\_Name}
+ در سایت  
+\href{https://quera.org/overview/add_to_course/course/10631}{\lr{Quera}} 
+ قرار دهید. همچنین فایل پایتون خود را به همان نام در قسمت مخصوص به خود آپلود کنید.
+	\item 
+کسب نمره کامل در هر سؤال مستلزم تحویل  \textbf{کدها} و \textbf{توضیحات} می‌باشد. 
+\item 
+برای سؤالات، باید روشی که استفاده کرده‌اید را توضیح  و نتایجی که گرفته‌اید را ارائه دهید. این توضیحات می‌تواند در یک فایل  .pdf  و یا در یک فایل  .ipynb باشد. 
+\item
+فایل های تحویلی شما دو بخش می‌باشند، یک بخش فایل .zip که شامل فایل .ipynb کد و گزارش شما میباشد، یک بخش هم کد های هر سوال به شکل جداگانه میباشند که باید در فرمت .py در سامانه کوئرا در کنار فایل .zip آپلود شوند.(برای مثال اگر تمرین شامل 3 سوال بود، باید علاوه بر فایل .zip که تحویل مصحح میشود، 3 فایل .py در سامانه کوئرا در محل بارگذاری مشخص شده آپلود کنید.)
+\item 
+کدهای خود را خوانا بنویسید و کامنت‌‌گذاری کنید. در plot های خود عنوان، label و خط‌کشی‌های مناسب را اضافه کنید.
+\item
+در طول ترم امکان ارسال با تاخیر پاسخ  همه‌ی تمارین تا سقف پنج روز و در مجموع دوازده روز وجود دارد. پس از گذشت این مدت، پاسخ‌های ارسال‌شده پذیرفته نخواهند بود. همچنین، به ازای هر روز تأخیر غیر مجاز  بیست درصد از نمره تمرین به صورت ساعتی کسر خواهد شد.
+\item
+کدهای شما تماماً باید توسط خودتان نوشته شده باشند. هرگونه استفاده از کد دیگران به هر شکل ممکن، تقلب محسوب می‌شود و نمره تمرین کامپیوتری جاری صفر خواهد شد. پس در هیچ صورت کدهای خود را برای دیگران ارسال نکنید.
+\item 
+ابهام يا اشكالات خود را مي توانيد  از طریق
+\href{mailto:smmzdr@gmail.com}{\LR{Smmzdr@gmail.com}}
+یا 
+\href{mailto:javadiamirhosein.2000@gmail.com}{\LR{Javadiamirhosein.$2000$@gmail.com}}
+مطرح نماييد.
+\item 
+مهلت تحویل:  
+\textbf{
+	جمعه 26 فروردین ساعت 23:59 
+}
+\end{enumerate}
+\rule[0.1\baselineskip]{\textwidth}{1.5pt}
+
+\clearpage
+\section{‌جمع متغیر تصادفی}
+در این سوال قصد داریم که به جمع متغیرهای تصادفی بپردازیم و با نمونه‌برداری از متغیرهای تصادفی هیستوگرام نرمالایز ‌شده آن‌ها را رسم کنیم و شباهت این هیستوگرام نرمالایز شده(تابع جرم احتمال تجربی) با تابع جرم احتمال واقعی متغیرها را بررسی کنیم. دقت کنید که منظور ما از هیستوگرام نرمالایز شده این است که مقادیر داده های هر ستون بر تعداد کل داده‌ها تقسیم شده باشند تا مقادیر نرمالیزه شده بین 0 تا 1 را به خود اختصاص دهند.
+\begin{enumerate}
+	\item
+	فرض کنید:
+\begin{gather*}
+ X_i \sim Bernoulli(p = 0.4) 
+\end{gather*}
+از متغیرهای تصادفی
+\;
+$ X_1, X_2, ..., X_{10} $
+\;
+$1000$
+نمونه بگیرید و $Y$ را به شکل زیر تعریف کنید:
+\begin{equation*} \label{y1}
+	Y_1 = \sum_{i=1}^{10} X_i
+\end{equation*}
+نمودار هیستوگرام نرمالایز شده متغیر $Y_1$ را رسم کنید. انتظار دارید این هیستوگرام متناظر با تابع جرم احتمال چه متغیر تصادفی‌ای با چه پارامترهایی باشد؟ تابع جرم احتمال این متغیر تصادفی را نیز رسم کنید و با تابع جرم احتمال تجربی $Y_1$ مقایسه کنید.
+	\item
+	فرض کنید:
+\begin{gather*}
+	Z_i \sim Geometric(p = 0.6) 
+\end{gather*}
+از متغیرهای تصادفی
+\;
+$ Z_1, Z_2, Z_3 $
+\;
+$1000$
+نمونه بگیرید و $Y_2$ را به شکل زیر تعریف کنید:
+\begin{equation*}
+	Y_2 = \sum_{i=1}^{3} Z_i
+\end{equation*}
+مراحلی که در 
+\hyperref[y1]{بخش 1}
+ انجام دادید را دوباره با $Y_2$ تکرار کنید.
+\\
+\end{enumerate}
+
+توابع پیشنهادی:
+\lr{np.random.geometric, scipy.stats.bernoulli}
+از کتاب‌خانه‌های
+\lr{numpy, scipy}
+\section{متغیر تصادفی حدی!}
+عدد ثابت
+$ \lambda = 5 $
+را در نظر بگیرید. متغیر های تصادفی $X_i$ و $Y$ را به شکل زیر تعریف میکنیم:
+\begin{equation*}
+	X_i \sim Bernoulli(\frac{\lambda}{n}) \quad Y = \sum_{i=1}^{n} X_i
+\end{equation*}
+\begin{enumerate}
+	\item
+	
+	به ازای
+	$ n = 10, 100, 1000, 10000, 100000 $
+	10000 نمونه از متغیر
+	$Y$
+	بگیرید و هیستوگرام نرمالایز شده آن را رسم کنیم، با افزایش $n$ تابع جرم احتمال تجربی بدست آمده به تابع جرم احتمال چه متغیر تصادفی ای همگرا میشود؟ تابع جرم احتمال آن متغیر را نیز رسم کرده و مقایسه کنید.
+	\item
+	در قسمت قبل امیدریاضی و واریانس $Y$ با افزایش $n$ به چه مقادیری همگرا میشوند؟(از نظر تئوری بررسی کنید)
+	\\
+\end{enumerate}
+توابع پیشنهادی:
+\lr{scipy.stats.bernoulli}
+از کتاب‌خانه‌ی 
+\lr{scipy}
+\section{امید ریاضی و واریانس مجموع}
+در این بخش چند متغیر تصادفی را تعریف میکنیم سپس به بررسی امیدریاضی و واریانس مجموع آن‌ها می‌پردازیم.
+\begin{enumerate}
+	\item
+
+فرض کنید
+\begin{gather*}
+	X_{1} \sim Binomial(n=5,p=0.4) 
+	\\
+	X_{2} \sim Poisson(\lambda=1.6)
+	\\
+	X_{3} \sim Geometric(p=0.1)
+\end{gather*}
+از متغیر تصادفی‌های 
+$ 	X_{1},X_{2},X_{3} $،
+$ N = 10000 $
+نمونه بردارید و $ Y $ را به شکل زیر تعریف کنید.
+\begin{equation*}
+	Y = X_{1}+X_{2}+X_{3}
+\end{equation*} 
+حال هیستوگرام $ Y $ را رسم کنید. همچنین میانگین و واریانس $ Y $ را به دست بیاورید و ارتباط این مقادیر را با میانگین و واریانس
+$ X_{1} $،
+$ X_{2} $، 
+$ X_{3} $
+بررسی کنید.
+	\item
+متغیر تصادفی 
+\begin{gather*}
+	X_i \sim Bernoulli(p = 0.8)
+\end{gather*}
+را در نظر بگیرید. متغیر تصادفی $Y$ را به شکل زیر تعریف میکنیم:
+\begin{equation*}
+	Y = \frac{1}{n} \sum_{i=1}^{n} X_i
+\end{equation*}
+به ازای سه حالت
+$ N = 5, 40, 300 $
+از متغیر تصادفی
+$Y$
+1000 نمونه تولید کنید و سه هیستوگرام بدست آمده را جداگانه رسم کنید. با افزایش
+$n$
+امیدریاضی و واریانس
+$Y$
+چگونه تغییر میکنند؟ چرا؟
+\\
+\end{enumerate}
+توابع پیشنهادی:
+\lr{np.random.binomial, np.random.poisson, np.random.geometric}
+از کتاب‌خانه‌ی 
+\lr{numpy}
+
+\section{پارادوکس روز تولد}
+احسان قصد دارد مهمانی ای برگزار کند و $n$ نفر را نیز به این مهمانی دعوت خواهد کرد. احسان یک بازی تدارک دیده است. او از هر مهمان می‌خواهد که روز تولد خود را روی کاغذ بنویسد و به او بدهد. اگر حداقل دو نفر از مهمان‌ها متولد یک روز باشند احسان بازی را میبرد و مهمان‌ها باید هزینه تور اروپای احسان را بدهند. در غیر این صورت احسان باید هزینه سفر همه مهمان‌ها به زنوز را پیاده شود. از آنجایی که احسان باید به همه مهمان‌ها شام بدهد نمی‌خواهد تعداد مهمان‌ها را زیاد در نظر بگیرد تا در صورت رفتن به اروپا بیشتر خرید کند. برای همین میخواهیم به او کمک کنیم تا با کمترین تعداد مهمان با احتمال بالایی بازی را ببرد و رایگان به اروپا برود.
+\begin{enumerate}
+	\item
+	$ 10000 $ آزمایش انجام بدهید. در هر ازمایش قصد داریم تخمینی از $n$ به دست بیاوریم، به این صورت که شروع به انتخاب تصادفی روزهای سال می‌کنیم و زمانی که روزی را انتخاب کردیم که قبلا هم انتخاب شده بود تعداد انتخاب‌هایی که تا آن مرحله انجام داده بودیم را ذخیره میکنیم. سپس هیستوگرامی از تعداد انتخاب های این $ 10000 $ آزمایش رسم می‌کنیم.
+	\item
+	حال احتمال پیروزی احسان به ازای $n$ مهمان را برای 
+	$ n = 1 \sim 365 $
+	را به دست بیاورید و رسم کنید. اگر احسان بخواهد حداقل با احتمال
+	$\frac{1}{2}$
+	برنده شود باید چند مهمان دعوت کند؟
+\end{enumerate}
+\end{document}
